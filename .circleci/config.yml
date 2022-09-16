@@ -1,0 +1,15 @@
+version: 2.1
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.0
+jobs:
+  build:
+     docker:
+      - image: hashicorp/terraform:0.13.5
+     steps:
+     - checkout
+#    - sonarcloud/scan
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          context: sonarcloud
