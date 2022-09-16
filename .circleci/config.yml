@@ -4,4 +4,3 @@ jobs:
       - image: 'ubuntu:latest'
     steps:
       - checkout
-      - sonarcloud/scan
