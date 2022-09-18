@@ -43,4 +43,3 @@ resource "aws_api_gateway_stage" "book-service" {
   rest_api_id   = aws_api_gateway_rest_api.book-service.id
   stage_name    = "book-service"
 }
-
