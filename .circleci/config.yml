@@ -4,6 +4,8 @@ jobs:
   build:
     docker:
       - image: 'ubuntu:latest'
+    -run:
+      sudo apt install curl -y
     steps:
       - checkout
       - sonarcloud/scan
