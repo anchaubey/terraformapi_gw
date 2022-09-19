@@ -32,7 +32,7 @@ commands:
 
       - run: ./sonar-scanner-4.2.0.1873/bin/sonar-scanner \
                -Dsonar.projectKey=terraform-scanned \
-               -Dsonar.host.url="https://sonarcloud.io/"" \
+               -Dsonar.host.url="https://sonarcloud.io/" \
                -Dsonar.sources="." \
                -Dsonar.login=<< parameters.sonar_login >>
 
