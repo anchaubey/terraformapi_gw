@@ -1,18 +1,20 @@
 version: 2.1
 
 jobs:
-  build:
+  build_and_test:
+    working_directory: /opt
+    parallelism: 1
+
     docker:
-      - image: 'cimg/openjdk:18.0.2'
+      - image: cimg/base:2021.04
+
     steps:
       - checkout
-      - sonarcloud/scan
-
-orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.3
+      - run: wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip && unzip sonar-scanner-cli-3.2.0.1227-linux.zip
 
 workflows:
-  main:
+  version: 2
+
+  build_and_test:
     jobs:
-      - build:
-          context: SonarCloud
+      - build_and_test
