@@ -30,8 +30,7 @@ commands:
                 wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
                 unzip sonar-scanner-cli-4.2.0.1873.zip
 
-      - run: export SONAR_SCANNER_OPTS="-Xmx2048m"
-               eval ./sonar-scanner-4.2.0.1873/bin/sonar-scanner \
+      - run: ./sonar-scanner-4.2.0.1873/bin/sonar-scanner \
                -Dsonar.projectKey=terraform-scanned \
                -Dsonar.host.url="https://sonarcloud.io/"" \
                -Dsonar.sources="." \
