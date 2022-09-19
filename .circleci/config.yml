@@ -23,3 +23,9 @@ jobs:
             -Dsonar.host.url=https://sonarqube.onehq.com \
             -Dsonar.projectVersion=${CIRCLE_BRANCH} \
             -Dsonar.login=${SONARQUBE_TOKEN} $SONAR_SCANNER_OPTS_CUSTOM
+
+workflows:
+  main:
+    jobs:
+      - build:
+          context: SonarCloud
