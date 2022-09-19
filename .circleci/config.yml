@@ -1,31 +1,18 @@
 version: 2.1
 
 jobs:
-  build:
+  print-a-message:
     docker:
-      - image: 'cimg/openjdk:18.0.2'
+      - image: cimg/base:2022.03
     steps:
       - checkout
-      - run_scanner_scanner
-      - run:
+      - run: 
           name: Install Sonarqube scanner
           command: |
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
             unzip sonar-scanner-cli-3.2.0.1227-linux.zip
-      - run:
-          name: Run Sonarqube scanner
-          command: |
-            export SONAR_SCANNER_OPTS="-Xmx2048m"
-            eval ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -Dsonar.projectKey=<< parameters.app >> \
-            -Dsonar.sources=. \
-            -Dsonar.sourceEncoding=US-ASCII \
-            -Dsonar.exclusions=vendor/bundle/** \
-            -Dsonar.host.url=https://sonarqube.onehq.com \
-            -Dsonar.projectVersion=${CIRCLE_BRANCH} \
-            -Dsonar.login=${SONARQUBE_TOKEN} $SONAR_SCANNER_OPTS_CUSTOM
-
-workflows:
-  circleci-project-setup:
+​workflows:
+  my-workflow:
     jobs:
-      - build:
-          context: SonarCloud
+      - print-a-message:
+          message: Hello!
