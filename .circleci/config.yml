@@ -2,9 +2,8 @@ version: 2.1
 
 jobs:
   build_and_test:
-    working_directory: /opt
     parallelism: 1
-
+    
     docker:
       - image: cimg/base:2021.04
 
