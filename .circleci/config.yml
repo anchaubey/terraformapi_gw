@@ -25,7 +25,7 @@ jobs:
             -Dsonar.login=${SONARQUBE_TOKEN} $SONAR_SCANNER_OPTS_CUSTOM
 
 workflows:
-  main:
+  circleci-project-setup:
     jobs:
       - build:
           context: SonarCloud
