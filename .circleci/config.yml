@@ -1,18 +1,18 @@
 version: 2.1
 
 jobs:
-  print-a-message:
+  build:
     docker:
-      - image: cimg/base:2022.03
+      - image: 'cimg/openjdk:18.0.2'
     steps:
       - checkout
-      - run: 
-          name: Install Sonarqube scanner
-          command: |
-            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
-            unzip sonar-scanner-cli-3.2.0.1227-linux.zip
-​workflows:
-  my-workflow:
+      - sonarcloud/scan
+
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.3
+
+workflows:
+  main:
     jobs:
-      - print-a-message:
-          message: Hello!
+      - build:
+          context: SonarCloud
