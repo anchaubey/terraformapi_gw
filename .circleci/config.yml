@@ -29,14 +29,14 @@ commands:
             command: |
                 wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
                 unzip sonar-scanner-cli-4.2.0.1873.zip
-                
-      - run: ls -ltrh
+      - run: sudo apt-get update && sudo apt-get install -y openjdk-8-jdk
+      
       - run: ./sonar-scanner-4.2.0.1873/bin/sonar-scanner \
                -Dsonar.projectKey=terraform-scanned \
                -Dsonar.host.url="https://sonarcloud.io/" \
                -Dsonar.sources="." \
                -Dsonar.login=<< parameters.sonar_login >>
-      
+
 jobs:
   check-code-job:
     executor: scanner
