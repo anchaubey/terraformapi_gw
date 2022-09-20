@@ -11,14 +11,13 @@ commands:
 
     steps:
       - checkout
-      - run: export SONAR_SCANNER_VERSION=4.7.0.2747
-      - run: export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
-      - run: curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
-      - run: unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
-      - run: export PATH=$SONAR_SCANNER_HOME/bin:$PATH
-      - run: export SONAR_SCANNER_OPTS="-server"
+      - run:
+            name: Install Sonarqube scanner
+            command: |
+                wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
+                unzip sonar-scanner-cli-4.2.0.1873.zip
       - run: sudo apt-get update && sudo apt-get install -y openjdk-8-jdk
-      - run: sonar-scanner \
+      - run: ./sonar-scanner-4.2.0.1873/bin/sonar-scanner \
              -Dsonar.organization=anchaubey \
              -Dsonar.projectKey=anchaubey_terraformapi_gw \
              -Dsonar.sources=. \
