@@ -8,34 +8,22 @@ executors:
 commands:
   check-code-quality:
     description: Check Code Quality
-    parameters:
-      sonar_server_url:
-        type: string
-        description: "URL of your SonarQube server. e.g.: http://my.sonarqube,server:9000"
-        default: "https://sonarcloud.io/"
-      sonar_login:
-        description: "Authentication key (sonar.login paramter) to access SonarQube and perform analysis"
-        type: string
-        default: "a5156cc573ff589635ba9f3d4cdef60ad16140e1"
-      sonar_sources:
-        description: "Where the files are located?"
-        type: string
-        default: "."
 
     steps:
       - checkout
-      - run:
-            name: Install Sonarqube scanner
-            command: |
-                wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
-                unzip sonar-scanner-cli-4.2.0.1873.zip
+      - run: export SONAR_SCANNER_VERSION=4.7.0.2747
+      - run: export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
+      - run: curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
+      - run: unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
+      - run: export PATH=$SONAR_SCANNER_HOME/bin:$PATH
+      - run: export SONAR_SCANNER_OPTS="-server"
       - run: sudo apt-get update && sudo apt-get install -y openjdk-8-jdk
-      
-      - run: ./sonar-scanner-4.2.0.1873/bin/sonar-scanner \
-               -Dsonar.projectKey=terraform-scanned \
-               -Dsonar.host.url=<<parameters.sonar_server_url >> \
-               -Dsonar.sources=<< parameters.sonar_sources >> \
-               -Dsonar.login=<< parameters.sonar_login >>
+      - run: sonar-scanner \
+             -Dsonar.organization=anchaubey \
+             -Dsonar.projectKey=anchaubey_terraformapi_gw \
+             -Dsonar.sources=. \
+             -Dsonar.host.url=https://sonarcloud.io
+             -Dsonar.login=57846888475a2cd4350f15c88b7dc1f75d406f99
 
 jobs:
   check-code-job:
