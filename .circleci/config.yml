@@ -17,7 +17,7 @@ commands:
                 wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
                 unzip sonar-scanner-cli-4.2.0.1873.zip
       - run: sudo apt-get update && sudo apt-get install -y openjdk-11-jdk
-      - run: ./sonar-scanner-4.2.0.1873/bin/sonar-scanner -X -Dsonar.organization=anchaubey -Dsonar.organization=org -Dsonar.projectKey=terraformapi_gw -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=57846888475a2cd4350f15c88b7dc1f75d406f99
+      - run: ./sonar-scanner-4.2.0.1873/bin/sonar-scanner -X -Dsonar.organization=anchaubey -Dsonar.organization=org -Dsonar.projectKey=anchaubey_terraformapi_gw -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=57846888475a2cd4350f15c88b7dc1f75d406f99
 
 jobs:
   check-code-job:
