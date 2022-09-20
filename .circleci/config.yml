@@ -3,7 +3,7 @@ version: 2.1
 executors:
   scanner:
     docker:
-      - image: sonarqube:8.9-community
+      - image: cimg/base:2022.09
 
 commands:
   check-code-quality:
